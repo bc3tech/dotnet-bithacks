@@ -7,7 +7,7 @@ namespace UnitTests
     public class LongTests
     {
         [TestMethod]
-        public void IsPowerOf()
+        public void IsPowerOf2()
         {
             Assert.IsTrue(4UL.IsPowerOf2());
             Assert.IsFalse(3UL.IsPowerOf2());
