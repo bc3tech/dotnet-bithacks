@@ -72,5 +72,43 @@ namespace BitHacks
             }
             return c;
         }
+
+        /// <summary>
+        /// Gets the parity of this instance
+        /// </summary>
+        /// <param name="v">This instance.</param>
+        /// <returns></returns>
+        public static bool GetParity(this ulong v)
+        {
+            bool parity = false;  // parity will be the parity of v
+
+            while (v > 0)
+            {
+                parity = !parity;
+                v = v & (v - 1);
+            }
+
+            return parity;
+        }
+
+        /// <summary>
+        /// Reverses the bits of this instance
+        /// </summary>
+        /// <param name="v">This instance.</param>
+        /// <returns></returns>
+        public static ulong ReverseBits(this ulong v)
+        {
+            ulong r = v; // r will be reversed bits of v; first get LSB of v
+            int s = sizeof(ulong) * CHAR_BIT - 1; // extra shift needed at end
+
+            for (v >>= 1; v > 0; v >>= 1)
+            {
+                r <<= 1;
+                r |= v & 1;
+                s--;
+            }
+            r <<= s; // shift when v's highest bits are zero
+            return r;
+        }
     }
 }
