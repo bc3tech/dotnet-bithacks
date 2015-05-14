@@ -1,2 +1,2 @@
 # dotnet-bithacks
-Bitwise hacks for tweaking bits, nibbles, and bytes.
+PCL Implementation of the hacks shown at https://graphics.stanford.edu/~seander/bithacks.html
