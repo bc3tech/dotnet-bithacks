@@ -124,5 +124,23 @@ namespace BitHacks
             }
             return c;
         }
+
+        /// <summary>
+        /// Rounds to next power of 2.
+        /// </summary>
+        /// <param name="me">This instance.</param>
+        /// <returns></returns>
+        public static uint ToNextPowerOf2(this int me)
+        {
+            var v = (uint)me;
+            v--;
+            v |= v >> 1;
+            v |= v >> 2;
+            v |= v >> 4;
+            v |= v >> 8;
+            v |= v >> 16;
+            v++;
+            return v;
+        }
     }
 }

@@ -56,5 +56,12 @@ namespace UnitTests
             // 67292000 = ‭0100000000101100101101100000‬
             Assert.AreEqual(5, 67292000.ConsecutiveTrailing0Bits());
         }
+
+        [TestMethod]
+        public void ToNextPowerOf2()
+        {
+            Assert.AreEqual(4u, 3.ToNextPowerOf2());
+            Assert.AreEqual(32u, 26.ToNextPowerOf2());
+        }
     }
 }
