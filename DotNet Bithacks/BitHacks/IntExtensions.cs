@@ -81,5 +81,36 @@ namespace BitHacks
             r <<= s; // shift when v's highest bits are zero
             return r;
         }
+
+        /// <summary>
+        /// Computes LogBase2 of this instance
+        /// </summary>
+        /// <param name="v">This instance.</param>
+        /// <returns></returns>
+        public static int LogBase2(this int v)
+        {
+            var b = new uint[] { 0x2, 0xC, 0xF0, 0xFF00, 0xFFFF0000 };
+            var S = new int[] { 1, 2, 4, 8, 16 };
+            int i;
+
+            int r = 0; // result of log2(v) will go here
+            for (i = 4; i >= 0; i--) // unroll for speed...
+            {
+                if ((v & b[i]) > 0)
+                {
+                    v >>= S[i];
+                    r |= S[i];
+                }
+            }
+            return r;
+        }
+
+        public static int LogBase10(this int v)
+        {
+            return (v >= 1000000000) ? 9 : (v >= 100000000) ? 8 : (v >= 10000000) ? 7 :
+                (v >= 1000000) ? 6 : (v >= 100000) ? 5 : (v >= 10000) ? 4 :
+                (v >= 1000) ? 3 : (v >= 100) ? 2 : (v >= 10) ? 1 : 0;
+
+        }
     }
 }
