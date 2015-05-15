@@ -49,25 +49,5 @@ namespace UnitTests
             // r  = 0110 0100 (0000 * 6) = ‭‭1677721600‬
             Assert.AreEqual(1677721600, 38.ReverseBits());
         }
-
-        [TestMethod]
-        public void LogBase2()
-        {
-            for (int i = 0; i < 31; i++)
-            {
-                this.TestContext.WriteLine("Math.Pow(2,{0}) = {1}", i, Math.Pow(2, i));
-                Assert.AreEqual(i, ((int)Math.Pow(2, i)).LogBase2());
-            }
-        }
-
-        [TestMethod]
-        public void LogBase10()
-        {
-            for (int i = 0; i < 10; i++)
-            {
-                this.TestContext.WriteLine("Math.Pow(10,{0}) = {1}", i, Math.Pow(10, i));
-                Assert.AreEqual(i, ((int)Math.Pow(10, i)).LogBase10());
-            }
-        }
     }
 }
