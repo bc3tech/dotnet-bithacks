@@ -49,5 +49,12 @@ namespace UnitTests
             // r  = 0110 0100 (0000 * 6) = ‭‭1677721600‬
             Assert.AreEqual(1677721600, 38.ReverseBits());
         }
+
+        [TestMethod]
+        public void ConsecutiveTrailing0Bits()
+        {
+            // 67292000 = ‭0100000000101100101101100000‬
+            Assert.AreEqual(5, 67292000.ConsecutiveTrailing0Bits());
+        }
     }
 }

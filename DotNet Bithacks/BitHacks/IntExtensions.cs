@@ -81,5 +81,48 @@ namespace BitHacks
             r <<= s; // shift when v's highest bits are zero
             return r;
         }
+
+        /// <summary>
+        /// Gets the number of consecutive trailing bits in this instance
+        /// </summary>
+        /// <param name="v">This instance.</param>
+        /// <returns></returns>
+        public static byte ConsecutiveTrailing0Bits(this int v)
+        {
+            byte c;     // c will be the number of zero bits on the right,
+                        // so if v is 1101000 (base 2), then c will be 3
+                        // NOTE: if 0 == v, then c = 31.
+            if ((v & 1) > 0)
+            {
+                // special case for odd v (assumed to happen half of the time)
+                c = 0;
+            }
+            else
+            {
+                c = 1;
+                if ((v & 0xffff) == 0)
+                {
+                    v >>= 16;
+                    c += 16;
+                }
+                if ((v & 0xff) == 0)
+                {
+                    v >>= 8;
+                    c += 8;
+                }
+                if ((v & 0xf) == 0)
+                {
+                    v >>= 4;
+                    c += 4;
+                }
+                if ((v & 0x3) == 0)
+                {
+                    v >>= 2;
+                    c += 2;
+                }
+                c -= (byte)(v & 1);
+            }
+            return c;
+        }
     }
 }
