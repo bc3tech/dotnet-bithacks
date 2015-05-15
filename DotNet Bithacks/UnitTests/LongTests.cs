@@ -45,8 +45,8 @@ namespace UnitTests
         [TestMethod]
         public void ReverseBits()
         {
-            // 38 = (0000 * 6) 0010 0110
-            // r  = 0110 0100 (0000 * 6) = ‭7205759403792793664‬
+            // 38 = (0000 * 14) 0010 0110
+            // r  = 0110 0100 (0000 * 14) = ‭7205759403792793664‬
             Assert.AreEqual(7205759403792793600UL, 38UL.ReverseBits());
         }
     }
