@@ -5,7 +5,7 @@ namespace BitHacks
     public static class LongExtensions
     {
         /// <summary>Number of bits per byte</summary>
-        const byte CHAR_BIT = 8;
+        private const byte BITS_PER_BYTE = 8;
 
         /// <summary>
         /// Determines whether [is power of2].
@@ -15,35 +15,6 @@ namespace BitHacks
         public static bool IsPowerOf2(this ulong v)
         {
             return v > 0 && ((v & (v - 1)) == 0);
-        }
-
-        /// <summary>
-        /// Sign extends this value.
-        /// </summary>
-        /// <param name="x">This instance.</param>
-        /// <param name="sourceBitCount"># of bits used by this instance's value</param>
-        /// <returns></returns>
-        public static ulong SignExtend(this ulong x, int sourceBitCount)
-        {
-            var m = 1U << (sourceBitCount - 1); // mask can be pre-computed if b is fixed
-
-            x &= ((1U << sourceBitCount) - 1);  // (Skip this if bits in x above position b are already zero.)
-            return (x ^ m) - m;
-        }
-
-        public static ulong SetBits(this ulong x, ulong mask)
-        {
-            return SetOrClearBits(true, mask, x);
-        }
-
-        public static ulong ClearBits(this ulong x, ulong mask)
-        {
-            return SetOrClearBits(false, mask, x);
-        }
-
-        private static ulong SetOrClearBits(bool f, ulong m, ulong w)
-        {
-            return (w & ~m) | (Convert.ToUInt64(!f) & m);
         }
 
         /// <summary>
@@ -74,7 +45,7 @@ namespace BitHacks
         }
 
         /// <summary>
-        /// Gets the parity of this instance
+        /// Gets the parity of this instance (odd parity)
         /// </summary>
         /// <param name="v">This instance.</param>
         /// <returns></returns>
@@ -99,7 +70,7 @@ namespace BitHacks
         public static ulong ReverseBits(this ulong v)
         {
             ulong r = v; // r will be reversed bits of v; first get LSB of v
-            int s = sizeof(ulong) * CHAR_BIT - 1; // extra shift needed at end
+            int s = sizeof(ulong) * BITS_PER_BYTE - 1; // extra shift needed at end
 
             for (v >>= 1; v > 0; v >>= 1)
             {
